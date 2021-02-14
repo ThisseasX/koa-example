@@ -12,7 +12,7 @@ class Koa {
       const ctx = { req, res, body: '' };
 
       const middlewareChain = this.middleware.reduceRight(
-        (chain, middleware) => middleware.bind(null, ctx, chain),
+        (chain, middleware) => () => middleware(ctx, chain),
         noop,
       );
 
